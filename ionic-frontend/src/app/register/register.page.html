@@ -5,11 +5,6 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Eduvan</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
   <div class="container">
     <strong>Create Account</strong>
@@ -20,26 +15,51 @@
   <ion-card class="form-card">
     <ion-list>
       <ion-item>
-        <ion-input label="Full Name" placeholder="Enter your full name"></ion-input>
+        <ion-input
+          label="Full Name"
+          required
+          label-placement="floating"
+          placeholder="Enter your full name"
+        ></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-input label="Email" type="email" placeholder="Enter your email"></ion-input>
+        <ion-input
+          label="Email"
+          type="email"
+          required
+          placeholder="Enter your email"
+          label-placement="floating"
+        >
+        </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-input type="password" label="Password">
+        <ion-input
+          type="password"
+          label="Password"
+          required
+          minlength="6"
+          placeholder="Enter your password"
+          label-placement="floating"
+        >
           <ion-input-password-toggle slot="end"></ion-input-password-toggle>
         </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-input type="password" label="Confirm Password">
+        <ion-input
+          type="password"
+          label="Confirm Password"
+          required
+          placeholder="Confirm your password"
+          label-placement="floating"
+        >
           <ion-input-password-toggle slot="end"></ion-input-password-toggle>
         </ion-input>
       </ion-item>
 
-      <ion-button expand="block" class="create-button">
+      <ion-button expand="block" class="submit-button" routerLink="/login">
         Create Account
       </ion-button>
     </ion-list>
