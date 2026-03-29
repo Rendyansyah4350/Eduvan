@@ -7,6 +7,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import {
   IonContent,
   IonHeader,
@@ -41,6 +42,7 @@ import {
     IonInputPasswordToggle,
     IonText,
     IonCard,
+    RouterModule,
   ],
 })
 export class RegisterPage implements OnInit {

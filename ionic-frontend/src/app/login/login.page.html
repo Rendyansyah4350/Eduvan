@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Login</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="container">
+    <strong>Login</strong>
+    <p>Login to continue your learning journey</p>
+  </div>
+
+  <!-- Form di dalam Card -->
+  <ion-card class="form-card">
+    <ion-list>
+      <ion-item>
+        <ion-input
+          labelPlacement="floating"
+          label="Full Name"
+          placeholder="Enter your full name"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          type="email"
+          fill="solid"
+          label="Email"
+          labelPlacement="floating"
+          helperText="Enter a valid email"
+          errorText="Invalid email"
+          required
+          ngModelemail></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="password" label="Password">
+          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
+      </ion-item>
+
+      <ion-button expand="block" class="create-button"> Login </ion-button>
+    </ion-list>
+  </ion-card>
+
+  <!-- Login lainnya (opsional sesuai gambar) -->
+  <div class="login-others">
+    <ion-button color="medium" routerLink="/register"
+      >don't have an account?</ion-button
+    >
+  </div>
+</ion-content>
