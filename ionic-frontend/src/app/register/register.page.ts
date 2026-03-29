@@ -46,6 +46,8 @@ import {
   ],
 })
 export class RegisterPage implements OnInit {
+  email: string = '';
+  password: string = '';
   registerForm!: FormGroup;
 
   constructor(private fb: FormBuilder) {}

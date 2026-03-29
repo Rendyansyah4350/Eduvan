@@ -1,10 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>login</ion-title>
+    <ion-title>Eduvan</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Login</ion-title>
@@ -16,43 +17,56 @@
     <p>Login to continue your learning journey</p>
   </div>
 
-  <!-- Form di dalam Card -->
-  <ion-card class="form-card">
-    <ion-list>
-      <ion-item>
-        <ion-input
-          labelPlacement="floating"
-          label="Full Name"
-          placeholder="Enter your full name"
-        ></ion-input>
-      </ion-item>
+  <form #loginForm="ngForm">
+    <ion-card class="form-card">
+      <ion-list>
 
-      <ion-item>
-        <ion-input
-          type="email"
-          fill="solid"
-          label="Email"
-          labelPlacement="floating"
-          helperText="Enter a valid email"
-          errorText="Invalid email"
-          required
-          ngModelemail></ion-input>
-      </ion-item>
+        <!-- Email -->
+        <ion-item>
+          <ion-input
+            name="email"
+            type="email"
+            label="Email"
+            labelPlacement="floating"
+            helperText="Enter a valid email"
+            errorText="Invalid email"
+            placeholder="example@gmail.com"
+            required
+            email
+            [(ngModel)]="email">
+          </ion-input>
+        </ion-item>
 
-      <ion-item>
-        <ion-input type="password" label="Password">
-          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-        </ion-input>
-      </ion-item>
+        <!-- Password -->
+        <ion-item>
+          <ion-input
+            name="password"
+            type="password"
+            label="Password"
+            labelPlacement="floating"
+            placeholder="Enter your password"
+            required
+            [(ngModel)]="password">
 
-      <ion-button expand="block" class="create-button"> Login </ion-button>
-    </ion-list>
-  </ion-card>
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
 
-  <!-- Login lainnya (opsional sesuai gambar) -->
+          </ion-input>
+        </ion-item>
+
+        <!-- Button Login -->
+      <ion-button expand="block" class="submit-button" routerLink="/login">
+        Create Account
+      </ion-button>
+
+      </ion-list>
+    </ion-card>
+
+  </form>
+
   <div class="login-others">
-    <ion-button color="medium" routerLink="/register"
-      >don't have an account?</ion-button
-    >
+    <ion-button color="medium" routerLink="/register">
+      Don't have an account?
+    </ion-button>
   </div>
+
 </ion-content>
