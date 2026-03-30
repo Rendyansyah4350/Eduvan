@@ -56,7 +56,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     // Cek jika sudah login, langsung ke halaman home
     if (this.authService.isLoggedIn()) {
-      this.router.navigateByUrl('/dashboard', { replaceUrl: true });
+      this.router.navigateByUrl('/login', { replaceUrl: true }); // kalo (/dashboard) malah masuk lgs ke dashboard, kalo login gabisa masuk ke dashboard karna tidak ada account nya
     }
   }
 
