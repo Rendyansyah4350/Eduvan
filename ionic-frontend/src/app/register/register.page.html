@@ -52,6 +52,7 @@
           formControlName="confirmPassword"
           type="password"
           required
+          label="Confirm Password"
           placeholder="Confirm your password"
           label-placement="floating"
         >
@@ -64,7 +65,7 @@
         color="danger"
         *ngIf="registerForm.errors?.['mismatch'] && f['confirmPassword'].dirty"
       >
-        <small>Password tidak cocok</small>
+        <small>Invalid password</small>
       </ion-text>
 
       <!-- SUCCESS -->
@@ -72,7 +73,7 @@
         color="success"
         *ngIf="!registerForm.errors?.['mismatch'] && f['confirmPassword'].dirty"
       >
-        <small>Password cocok</small>
+        <small>Password match</small>
       </ion-text>
 
       <ion-button expand="block" class="submit-button" routerLink="/login">
