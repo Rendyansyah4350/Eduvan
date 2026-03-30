@@ -53,14 +53,46 @@ export class RegisterPage implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    this.registerForm = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+    this.registerForm = this.fb.group(
+      {
+        name: ['', Validators.required],
+        email: ['', Validators.required],
+        password: ['', Validators.required],
+        confirmPassword: ['', Validators.required],
+      },
+      {
+        validators: this.passwordMatchValidator,
+      },
+    );
+
+    // 🔥 FIX: trigger ulang validator saat ada perubahan
+    this.registerForm.valueChanges.subscribe(() => {
+      this.registerForm.updateValueAndValidity({ onlySelf: false });
     });
   }
 
+  // ✅ validasi password cocok
+  passwordMatchValidator(form: FormGroup) {
+    const password = form.get('password')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+
+    if (password !== confirmPassword) {
+      return { mismatch: true };
+    }
+    return null;
+  }
+
+  // ✅ biar gampang akses di HTML
+  get f() {
+    return this.registerForm.controls;
+  }
+
   onRegister() {
+    if (this.registerForm.invalid) {
+      console.log('Form tidak valid');
+      return;
+    }
+
     console.log(this.registerForm.value);
   }
 }
