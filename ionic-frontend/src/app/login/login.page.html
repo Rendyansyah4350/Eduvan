@@ -28,8 +28,6 @@
             type="email"
             label="Email"
             labelPlacement="floating"
-            helperText="Enter a valid email"
-            errorText="Invalid email"
             placeholder="example@gmail.com"
             required
             email
@@ -48,14 +46,12 @@
             required
             [(ngModel)]="password">
 
-            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-
-          </ion-input>
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle></ion-input>
         </ion-item>
 
         <!-- Button Login -->
-      <ion-button expand="block" class="submit-button" routerLink="/login">
-        Create Account
+      <ion-button expand="block" class="submit-button" (click)="login()">
+        Login
       </ion-button>
 
       </ion-list>

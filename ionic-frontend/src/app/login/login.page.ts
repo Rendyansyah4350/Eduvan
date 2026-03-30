@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';  // Tambahkan Router
 
 import {
   IonContent,
@@ -13,8 +13,12 @@ import {
   IonButton,
   IonList,
   IonInputPasswordToggle,
-  IonCard
+  IonCard,
+  LoadingController,
+  ToastController
 } from '@ionic/angular/standalone';
+
+import { AuthService } from '../services/auth'; 
 
 @Component({
   selector: 'app-login',
@@ -42,15 +46,75 @@ export class LoginPage implements OnInit {
   email: string = '';
   password: string = '';
 
-  constructor() {}
+  constructor(
+    private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
+    private authService: AuthService,  // Tambahkan
+    private router: Router              // Tambahkan
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // Cek jika sudah login, langsung ke halaman home
+    if (this.authService.isLoggedIn()) {
+      this.router.navigateByUrl('/dashboard', { replaceUrl: true });
+    }
+  }
 
-  login() {
-    console.log("Email:", this.email);
-    console.log("Password:", this.password);
+  async login() {
+    // Validasi sederhana
+    if (!this.email || !this.password) {
+      this.showToast('Email dan password harus diisi!', 'warning');
+      return;
+    }
 
-    // nanti di sini bisa kirim API ke Laravel
+    // Tampilkan loading
+    const loading = await this.loadingCtrl.create({
+      message: 'Memproses login...',
+      spinner: 'crescent'
+    });
+    await loading.present();
+
+    try {
+      // Panggil AuthService
+      const response = await this.authService.login(this.email, this.password);
+      
+      // Simpan token dan user
+      this.authService.saveToken(response.token);
+      this.authService.saveUser(response.user);
+      
+      // Tampilkan pesan sukses
+      await this.showToast('Login berhasil!', 'success');
+      
+      // Redirect ke halaman home
+      this.router.navigateByUrl('/dashboard', { replaceUrl: true });
+      
+    } catch (error: any) {
+      // Tampilkan pesan error
+      let errorMessage = 'Login gagal!';
+      if (error.error?.message) {
+        errorMessage = error.error.message;
+      }
+      
+      this.showToast(errorMessage, 'danger');
+    } finally {
+      loading.dismiss();
+    }
+  }
+
+  async showToast(message: string, color: string) {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      color: color,
+      position: 'bottom',
+      buttons: [
+        {
+          text: 'Tutup',
+          role: 'cancel'
+        }
+      ]
+    });
+    await toast.present();
   }
 
 }
